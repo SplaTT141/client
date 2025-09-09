@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom';
 
-export function Create() {
+function Create() {
     const [values, setValues] = useState({
         name: '',
         email: '',
@@ -11,7 +11,7 @@ export function Create() {
     });
 
     const navigate = useNavigate();
-    
+
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -52,3 +52,5 @@ export function Create() {
         </div>
     )
 };
+
+export default Create;
