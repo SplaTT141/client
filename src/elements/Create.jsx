@@ -28,7 +28,7 @@ function Create() {
             <div className="row">
                 <h3>Add Student</h3>
                 <div className="d-flex justify-content-end">
-                    <Link to='/' className='btn btn-success'>Home</Link>
+                    <Link to='/' className='btn btn-success'>Save</Link>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
