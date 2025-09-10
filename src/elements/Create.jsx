@@ -1,6 +1,6 @@
-import React, { useState } from 'react'; //Imprtuojam React biblioteką, ir useState metodą, kuris leidžia klientui redaguoti kintamojo duomenis
+import React, { useState } from 'react'; //Importuojam React biblioteką, ir useState hook'ą, kuris leidžia klientui redaguoti kintamojo duomenis
 import axios from 'axios'; //Importuojam axios biblioteką, kuri leidžia siųsti HTTP užklausas į serverį
-import {Link, useNavigate} from 'react-router-dom'; //Importuojame elementus iš react-router-dom bibliotekas. Link yra React'o '<a>' analogas, kuris leidžia naviguoti klientui tarp puslapių. useNavigate, leidžia perkelti klientą i tam tikrą puslapį po tam tikrų veiksmų
+import {useNavigate} from 'react-router-dom'; //Importuojame elementus iš react-router-dom bibliotekas. useNavigate, leidžia perkelti klientą i tam tikrą puslapį po tam tikrų veiksmų
 
 function Create() { //Sukuriame funkciją, kuri leis klientui sukurti naują studentą
     const [values, setValues] = useState({ //Sukuriame masyvą, kuriame 'values' kintamajame bus saugomi gauti iš kliento studento duomenis. setValues leidžia redaguoti duomenis. 'useState' metodas, kurio dėka galime viską tai atlikti React'o aplinkoje
