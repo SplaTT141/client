@@ -3,7 +3,7 @@ import axios from 'axios'; //Importuojam axios biblioteką, kuri leidžia siųst
 import {Link, useNavigate} from 'react-router-dom'; //Importuojame elementus iš react-router-dom bibliotekas. Link yra React'o '<a>' analogas, kuris leidžia naviguoti klientui tarp puslapių. useNavigate, leidžia perkelti klientą i tam tikrą puslapį po tam tikrų veiksmų
 
 function Create() { //Sukuriame funkciją, kuri leis klientui sukurti naują studentą
-    const [values, setValues] = useState({ //Sukuriame masyvą, kuriame 'values' kintamajame bus saugomi gauti iš kliento studento duomenis. setValues leidžia redaguoti duomenis. 'useState' metodas, kurio deka galime viską tai atlikti React'o aplinkoje
+    const [values, setValues] = useState({ //Sukuriame masyvą, kuriame 'values' kintamajame bus saugomi gauti iš kliento studento duomenis. setValues leidžia redaguoti duomenis. 'useState' metodas, kurio dėka galime viską tai atlikti React'o aplinkoje
         name: '', //Studento duomenys, kurie iškarto būna tušti
         email: '',
         age: '',
@@ -19,18 +19,15 @@ function Create() { //Sukuriame funkciją, kuri leis klientui sukurti naują stu
         axios.post('/add_user', values) //Siunčiame į serverį POST užklause adresu - "/add_user". Užklausoje perduodame studento duomenis (values)
         .then((res) => { //Jeigu užklausa yra sėkminga:
             navigate('/'); //Perkeliame klientą į '/' (Home puslapį)
-            console.log(res); //Išveda atsakyma į serverio consolę (visas axios objektas. Reikai nurodyti res.data, kad gauti tik serverio gražintus duomenis)
+            console.log(res.data); //Išveda atsakyma į serverio consolę (visas axios objektas. Reikai nurodyti res.data, kad gauti tik serverio gražintus duomenis)
         })
         .catch((err) => console.log(err)) //Jeigu iškyla klaida išvedame ją į console
     };
 
     return ( //Nurodome, kad Create funkcija turėtų atvaizduoti klientui
-        <div className="container vh-100 vw-100 bg-primary">
+        <div className="container-fluid vh-100 vw-100 bg-primary p-5">
             <div className="row">
                 <h3>Add Student</h3>
-                <div className="d-flex justify-content-end">
-                    <Link to='/' className='btn btn-success'>Save</Link> {/* Mygtukas, kurį paspaudus, klientas yra perkeliamas į 'Home' puslapį */}
-                </div>
                 <form onSubmit={handleSubmit}> {/* Sukuriame formą, į kurią suvedus duomenis ir patvirtinus yra iškviečiama 'handleSubmit' funkcija */}
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
@@ -48,6 +45,7 @@ function Create() { //Sukuriame funkciją, kuri leis klientui sukurti naują stu
                         <label htmlFor="age">Age</label>
                         <input type="text" name="age" onChange={e => setValues({...values, age: e.target.value})} />
                     </div>
+                    <button className='btn btn-success mt-3' type='submit'>Submit</button> {/* Patvirtiname įvestus duomenis ir patvirtinam, kad viskas gerai */}
                 </form>
             </div>
         </div>
