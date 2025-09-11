@@ -19,7 +19,7 @@ function Create() { //Sukuriame funkciją, kuri leis klientui sukurti naują stu
         axios.post('/add_user', values) //Siunčiame į serverį POST užklause adresu - "/add_user". Užklausoje perduodame studento duomenis (values)
         .then((res) => { //Jeigu užklausa yra sėkminga:
             navigate('/'); //Perkeliame klientą į '/' (Home puslapį)
-            console.log(res.data); //Išveda atsakyma į serverio consolę (visas axios objektas. Reikai nurodyti res.data, kad gauti tik serverio gražintus duomenis)
+            console.log(res.data); //Išveda atsakyma į serverio consolę (visas axios objektas. Reikia nurodyti res.data, kad gauti tik serverio gražintus duomenis)
         })
         .catch((err) => console.log(err)) //Jeigu iškyla klaida išvedame ją į console
     };

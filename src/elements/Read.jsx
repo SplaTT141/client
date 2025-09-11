@@ -5,13 +5,13 @@ import {Link, useParams} from 'react-router-dom'; //Link yra React'o '<a>' analo
 function Read() { //Sukuriame funkciją
     const [data, setData] = useState([]); //Sukuriame masyvą, kuriame yra kintamasis 'data' (masyvas), kuriame bus saugomi studentų duomenys, o 'setData' leis redaguoti 'data' duomenys. Pradinė 'data' reikšmė yra '[]' (tusčias masyvas)
     const {id} = useParams(); //Naudojam, kad iš URL ištraukti dinaminius parametrus, šiuo atveju studento ID (numerį). Ištraukia iš URL tai kas yra po ":"
-    useEffect(() => { //Naudojam useEffect hook'ą
+    useEffect(() => { //Iškviečiame useEffect hook'o funkciją
         axios.get(`/get_student/${id}`) //Siunčiame serveriui GET užklausą į tam tikrą endpoint'ą (/get_studet/id), kuri grąžina studento duomenis JSON formatu
         .then ((res) => { //Jeigu viskas gerai:
             setData(res.data) //Pakeičiam tuščią 'data' į 'data' su duomenimis iš serverio
         })
         .catch((err) => console.log(err)) //Jeigu kyla klaida išvedam į console 
-    }, [id]); //useEffect funkcija suveikia, kai pasikeičia 'id' 
+    }, [id]); //useEffect funkcija vėl suveikia, kai pasikeičia 'id' 
 
   return (
     <div className="container-fluid vw-100 vh-100 bg-primary p-4">
