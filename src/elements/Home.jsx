@@ -14,12 +14,10 @@ function Home() { //Sukuriama funkcija
 
     function handleClickDelete(id) { //Sukuriama funkcija, kuri ištrina studentą pagal jo ID
         axios.delete(`/delete_user/${id}`) //Siunčiame 'delete' užklausą į serverį, kad galėtume panaikinti studento duomenis
-        .then (() => { //Jeigu viskas gerai:
-            axios.get('/students') //Vėl gauname visų studentų sąrašą
-            .then((res) => setData(res.data)) //Atnaujiname 'data' duomenis
-            .catch((err) => console.log(err)); //Jeigu kyla klaida išvedame ją į console
+        .then(() => { //Jeigu užklausa sėkminga:
+            setData(prevData => prevData.filter(student => student.id !== id)); //Atnaujiname UI studentų sąrašą, kuriame nėra atitikimo su ištrintu stundento ID
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err)); //Jeigu kyla klaida išvedame ją į console
     }
 
     return ( //Nurodome, kas bus atvaizduojama klientui 'Home' puslapyje
