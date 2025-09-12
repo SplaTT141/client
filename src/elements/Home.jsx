@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"; //Importuojam React biblioteką, useState hook'ą, kuris leidžia klientui redaguoti kintamojo duomenis, useEffect hook'ą , kuris padaro tam tikrą veiksmą, kai tam tikras kompontentas užsikraus arba pasikeis. useEffect yra skirtas „šalutiniams efektams“, kurie nevyksta tiesiogiai renderio metu
 import axios from 'axios'; //Importuojam axios biblioteką, kuri leidžia siųsti HTTP užklausas į serverį
-import {Link, useNavigate} from 'react-router-dom'; //Link yra React'o '<a>' analogas, kuris leidžia naviguoti klientui tarp puslapių.
+import {Link} from 'react-router-dom'; //Link yra React'o '<a>' analogas, kuris leidžia naviguoti klientui tarp puslapių. 
 
 function Home() { //Sukuriama funkcija
     const [data, setData] = useState([]); //Sukuriame masyvą, kuriame yra kintamasis 'data' (masyvas), kuriame bus saugomi studentų duomenys, o 'setData' leis redaguoti 'data' duomenys. Pradinė 'data' reikšmė yra '[]' (tusčias masyvas)
@@ -12,12 +12,12 @@ function Home() { //Sukuriama funkcija
         .catch((err) => console.log(err)) //Jeigu siunčiant užklausą įvyks klaida, ji bus atvaizduota console'je
     }, []); //Nurodome, kad ankstesnė logika būtų vykdoma vieną kartą, kai komponentas yra užkraunamas (dėl tusčio [])
 
-    function handleClickDelete(id) {
-        axios.delete(`/delete_user/${id}`)
-        .then (() => {
-            axios.get('/students')
-            .then((res) => setData(res.data))
-            .catch((err) => console.log(err));
+    function handleClickDelete(id) { //Sukuriama funkcija, kuri ištrina studentą pagal jo ID
+        axios.delete(`/delete_user/${id}`) //Siunčiame 'delete' užklausą į serverį, kad galėtume panaikinti studento duomenis
+        .then (() => { //Jeigu viskas gerai:
+            axios.get('/students') //Vėl gauname visų studentų sąrašą
+            .then((res) => setData(res.data)) //Atnaujiname 'data' duomenis
+            .catch((err) => console.log(err)); //Jeigu kyla klaida išvedame ją į console
         })
         .catch((err) => console.log(err));
     }
@@ -52,7 +52,7 @@ function Home() { //Sukuriama funkcija
                                     <td>
                                         <Link className="btn btn-success" to={`/read/${student.id}`}>Read</Link> {/* Kiekvienam studentui priskiriame 'read' mygtuką, kurį paspaudus bus galima perskaityti būtent pasirinkti studento duomenis */}
                                         <Link className="btn btn-success" to={`/edit/${student.id}`}>Edit</Link> {/* Kiekvienam studentui priskiriame 'edit' mygtuką, kurį paspaudus bus galima redaguoti pasirinkto studento duomenis */}
-                                        <button onClick={() => handleClickDelete(student.id)} className="btn btn-danger">Delete</button> {/* Kiekvienam studentui priskiriame 'delete' mygtuką, kurį paspaudus bus galima ištrinti pasirinkto studento duomenis */}
+                                        <button onClick={() => handleClickDelete(student.id)} className="btn btn-danger">Delete</button> {/* Kiekvienam studentui priskiriamas mygtukas, kuris paleidžia handleClickDelete funkciją su studento ID */}
                                     </td>
                                 </tr>
                             )
